@@ -1,9 +1,11 @@
 package com.parks.albertan.albertssfparks;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.parks.albertan.albertssfparks.utils.JsonReader;
@@ -72,6 +74,27 @@ public class LoadParks extends AsyncTask<String, Integer, String> {
 
             listView.setAdapter(proAdapter);
 
+             /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+
+
+                    int cock = view.getId();
+                    String  otherguyname = view.getTag(position).toString();
+
+                    Intent i = new Intent(activity,
+                            MessageInside.class);
+
+                    i.putExtra("other_guy_index", "" + );
+                    //i.putExtra("otherguyname", otherguyname);
+
+                    i.putExtra("prevActivity", "MainActivity");
+                    activity.startActivity(i);
+
+                }
+            });*/
+
             //  progressBar.setVisibility(View.GONE);
 
         } else {
@@ -102,11 +125,9 @@ public class LoadParks extends AsyncTask<String, Integer, String> {
                         jsondata.getJSONObject(i).getString("parkid"),
                         jsondata.getJSONObject(i).getString("number"),
                         jsondata.getJSONObject(i).getString("parkservicearea"),
-                        jsondata.getJSONObject(i).getString("location_1"),
                         jsondata.getJSONObject(i).getJSONObject("location_1").getString("needs_recoding"),
                         jsondata.getJSONObject(i).getJSONObject("location_1").getString("longitude"),
                         jsondata.getJSONObject(i).getJSONObject("location_1").getString("latitude"),
-
                         jsondata.getJSONObject(i).getJSONObject("location_1").getString("human_address"),
                         jsondata.getJSONObject(i).getString("acreage"),
                         jsondata.getJSONObject(i).getString("psamanager")

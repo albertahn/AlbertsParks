@@ -13,9 +13,20 @@ import java.util.Date;
 public class DatabaseStuff {
 	
 	public static final String KEY_ROWID = "_id";
-	public static final String KEY_DAY = "day";
-	public static final String KEY_NOTE = "note";
-    public static final String KEY_DATE = "date";
+	public static final String KEY_parktype= "parktype";
+	public static final String KEY_email = "email";
+    public static final String KEY_zipcode = "zipcode";
+
+	public static final String KEY_parkid= "parkid";
+	public static final String KEY_number = "number";
+	public static final String KEY_parkservicearea = "parkservicearea";
+	public static final String KEY_needs_recoding = "needs_recoding";
+	public static final String KEY_longitude = "longitude";
+	public static final String KEY_latitude = "latitude";
+	public static final String KEY_human_address= "human_address";
+
+	public static final String KEY_acreage= "acreage";
+	public static final String KEY_psamanager= "psamanager";
 	
 	//db stuff 
 	

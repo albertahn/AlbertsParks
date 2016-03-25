@@ -38,6 +38,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!--  inside message Activity -->
+        <activity
+            android:label="Message"
+            android:configChanges="keyboardHidden|orientation"
+            android:name=".MessageInside">
+        </activity>
         <!--important for gcm-->
         <meta-data
             android:name="com.google.android.gms.version"

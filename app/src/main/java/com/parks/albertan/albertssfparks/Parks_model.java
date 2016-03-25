@@ -36,7 +36,7 @@ public class Parks_model {
      parkid,
      number,
      parkservicearea,
-     location_1,
+
      needs_recoding,
     longitude,
      latitude,
@@ -53,7 +53,7 @@ public class Parks_model {
             String parkid,
             String number,
             String parkservicearea,
-            String location_1,
+
             String needs_recoding,
             String longitude,
             String latitude,
@@ -61,7 +61,7 @@ public class Parks_model {
             String acreage,
             String psamanager){
 
-        this.parktype=parktype;
+                this.parktype = parktype;
 
                 this.parkname=parkname;
                 this. email=email;
@@ -69,15 +69,13 @@ public class Parks_model {
                 this.parkid=parkid;
                 this. number=number;
                 this. parkservicearea=parkservicearea;
-                this. location_1= location_1;
+
                 this. needs_recoding=needs_recoding;
                 this. longitude=longitude;
                 this. latitude= latitude;
                 this. human_address =human_address;
                 this. acreage= acreage;
                 this. psamanager= psamanager;
-
-
 
 
     }// constructor
@@ -110,9 +108,7 @@ public class Parks_model {
 
         return parkservicearea;
     }//park
-    public String getlocation_1(){
-        return location_1;
-    }
+
     public String getneeds_recoding(){
 
         return needs_recoding;

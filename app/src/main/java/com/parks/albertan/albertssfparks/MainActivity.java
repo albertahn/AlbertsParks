@@ -32,6 +32,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -64,6 +65,8 @@ public class MainActivity extends AppCompatActivity
     // Declaring a Location Manager
     protected LocationManager locationManager;
 
+    TextView locationText;
+
     GoogleApiClient  mGoogleApiClient;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,9 +87,22 @@ public class MainActivity extends AppCompatActivity
 
         getLocation();
 
-        TextView locationText = (TextView) this.findViewById(R.id.text_location);
+         locationText = (TextView) this.findViewById(R.id.text_location);
 
         locationText.setText("Your location => lat:" +latitude+", long:"+longitude);
+
+
+        Button get_location = (Button) findViewById(R.id.get_location);
+
+
+        get_location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                getLocation();
+
+            }
+        });
 
     }//create
 
@@ -174,7 +190,7 @@ public class MainActivity extends AppCompatActivity
 
                                 longitude = location.getLongitude();
 
-
+                                locationText.setText("Your location => lat:" +latitude+", long:"+longitude);
 
 
                             }
