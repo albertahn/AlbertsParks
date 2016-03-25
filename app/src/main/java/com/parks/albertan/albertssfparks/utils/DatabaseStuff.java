@@ -17,15 +17,15 @@ public class DatabaseStuff {
 	public static final String KEY_email = "email";
     public static final String KEY_zipcode = "zipcode";
 
-	public static final String KEY_parkid= "parkid";
+	public static final String KEY_parkid = "parkid";
 	public static final String KEY_number = "number";
 	public static final String KEY_parkservicearea = "parkservicearea";
 	public static final String KEY_needs_recoding = "needs_recoding";
 	public static final String KEY_longitude = "longitude";
 	public static final String KEY_latitude = "latitude";
-	public static final String KEY_human_address= "human_address";
+	public static final String KEY_human_address = "human_address";
 
-	public static final String KEY_acreage= "acreage";
+	public static final String KEY_acreage = "acreage";
 	public static final String KEY_psamanager= "psamanager";
 	
 	//db stuff 
@@ -51,9 +51,20 @@ public class DatabaseStuff {
 			
 			db.execSQL("CREATE TABLE " + DATABASE_TABLE + " (" + 
 			KEY_ROWID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-					KEY_DAY + " TEXT NOT NULL, " +
-                    KEY_NOTE + " TEXT NOT NULL, " +
-                    KEY_DATE+ " TEXT NOT NULL);"
+							KEY_parktype+ " TEXT NOT NULL, " +
+							KEY_email + " TEXT NOT NULL, " +
+
+							KEY_zipcode + " TEXT NOT NULL, " +
+							KEY_parkid + " TEXT NOT NULL, " +
+							KEY_number + " TEXT NOT NULL, " +
+							KEY_parkservicearea + " TEXT NOT NULL, " +
+							KEY_needs_recoding + " TEXT NOT NULL, " +
+							KEY_longitude + " TEXT NOT NULL, " +
+							KEY_latitude + " TEXT NOT NULL, " +
+							KEY_human_address+" TEXT NOT NULL, " +
+							KEY_acreage+" TEXT NOT NULL, " +
+
+							KEY_psamanager+ " TEXT NOT NULL);"
 					
 					);
 			
