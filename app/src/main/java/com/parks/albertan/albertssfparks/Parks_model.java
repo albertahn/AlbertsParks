@@ -28,9 +28,21 @@ public class Parks_model {
 
 
 
-    private String name;
-    private  String userIndex;
-    private  String profilePicture;
+    String parktype,
+
+    parkname,
+     email,
+    zipcode,
+     parkid,
+     number,
+     parkservicearea,
+     location_1,
+     needs_recoding,
+    longitude,
+     latitude,
+     human_address,
+            acreage,
+            psamanager;
 
     Parks_model(
             String parktype,
@@ -45,9 +57,82 @@ public class Parks_model {
             String needs_recoding,
             String longitude,
             String latitude,
-            String human_address){
+            String human_address,
+            String acreage,
+            String psamanager){
+
+        this.parktype=parktype;
+
+                this.parkname=parkname;
+                this. email=email;
+                this.zipcode=zipcode;
+                this.parkid=parkid;
+                this. number=number;
+                this. parkservicearea=parkservicearea;
+                this. location_1= location_1;
+                this. needs_recoding=needs_recoding;
+                this. longitude=longitude;
+                this. latitude= latitude;
+                this. human_address =human_address;
+                this. acreage= acreage;
+                this. psamanager= psamanager;
 
 
 
+
+    }// constructor
+
+
+    public String getparktype(){
+
+        return parktype;
     }
-}
+
+    public String getparkname(){
+
+        return parkname;
+    }
+    public String getemail(){
+
+        return email;
+    }
+    public String getzipcode(){
+        return zipcode;
+    }
+    public String getparkid(){
+        return parkid;
+    }
+    public String getnumber(){
+
+        return number;
+    }
+    public String getparkservicearea(){
+
+        return parkservicearea;
+    }//park
+    public String getlocation_1(){
+        return location_1;
+    }
+    public String getneeds_recoding(){
+
+        return needs_recoding;
+    }
+    public String getlongitude(){
+        return longitude;
+    }
+    public String getlatitude(){
+        return latitude;
+    }
+    public String gethuman_address(){
+        return human_address;
+    }
+    public String getacreage(){
+
+        return acreage;
+    }
+    public String getpsamanager(){
+        return psamanager;
+    }
+
+
+}//end class

@@ -53,35 +53,11 @@ public class ParkListAdapter extends ArrayAdapter<Parks_model> {
 
         //4. set the text
 
-        username_view.setText(itemsArrayList.get(position).getusername());
+        username_view.setText(itemsArrayList.get(position).getparkname());
 
         // 5. retrn rowView
-        Integer memindex = Integer.parseInt(itemsArrayList.get(position).getuserIndex().toString());
+        Integer memindex = Integer.parseInt(itemsArrayList.get(position).getparkid());
         rowView.setId(memindex);
-
-        //set the pro pic
-
-        ImageView profile_photo = (ImageView) rowView.findViewById(R.id.profile_pic);
-
-        //new LoadProfileImage(profile_photo).execute(itemsArrayList.get(position).getProfilePic().toString());
-
-        String imageurl ="http://tanggoal.com/public/uploads/members_pic/"+ itemsArrayList.get(position).getProfilePic().toString();
-
-
-        ImageLoader imageloader = ImageLoader.getInstance();
-
-        //imageloader.displayImage(url, view);
-
-        DisplayImageOptions options = new DisplayImageOptions.Builder()
-                .showImageForEmptyUri(R.drawable.ic_launcher)
-                .displayer(new RoundedBitmapDisplayer(50))
-
-                .cacheInMemory(true)
-                .considerExifParams(true)
-                .build();
-
-        imageloader.displayImage(imageurl, profile_photo, options);
-
 
 
         return rowView;

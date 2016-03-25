@@ -29,8 +29,8 @@ public class LoadParks extends AsyncTask<String, Integer, String> {
     // ProgressBar progressBar;
 
 
-    public LoadParks(View rootView, Activity activity) {
-        this.rootView = rootView;
+    public LoadParks(Activity activity) {
+        this.rootView = activity.getWindow().getDecorView().findViewById(android.R.id.content);
         this.activity = activity;
 
 
@@ -66,9 +66,9 @@ public class LoadParks extends AsyncTask<String, Integer, String> {
         if (jsonArray != null) {
             //homeListView.getContext()
 
-            ParkListAdapter proAdapter = new ParkListAdapter(activity, generateData(jsonArray), userID);
+            ParkListAdapter proAdapter = new ParkListAdapter(activity, generateData(jsonArray));
 
-            final ListView listView = (ListView) rootView.findViewById(R.id.battle_list_view);
+            final ListView listView = (ListView) rootView.findViewById(R.id.park_list_view);
 
             listView.setAdapter(proAdapter);
 
@@ -83,9 +83,9 @@ public class LoadParks extends AsyncTask<String, Integer, String> {
     }// end post ex
 
 
-    ArrayList<Battle_partner_item> generateData(JSONArray jsondata) {
+    ArrayList<Parks_model> generateData(JSONArray jsondata) {
 
-        ArrayList<Battle_partner_item> items = new ArrayList<Battle_partner_item>();
+        ArrayList<Parks_model> items = new ArrayList<Parks_model>();
 
         for (int i = 0; i < jsondata.length(); i++) {
 
@@ -94,19 +94,23 @@ public class LoadParks extends AsyncTask<String, Integer, String> {
                 //check if course comment
                 //if(jsondata.getJSONObject(i).getString("courses_index")!="") {
 
-                items.add(new Battle_partner_item(
-                        jsondata.getJSONObject(i).getString("friends_key_index"),
-                        jsondata.getJSONObject(i).getString("my_index"),
-                        jsondata.getJSONObject(i).getString("other_friend_index"),
-                        jsondata.getJSONObject(i).getString("status"),
-                        jsondata.getJSONObject(i).getString("timestamp"),
-                        jsondata.getJSONObject(i).getString("news_type"),
-                        jsondata.getJSONObject(i).getString("battle"),
-                        jsondata.getJSONObject(i).getString("friend_username"),
-                        jsondata.getJSONObject(i).getString("friend_profile_picture"),
-                        jsondata.getJSONObject(i).getString("friend_points"),
+                items.add(new Parks_model(
+                        jsondata.getJSONObject(i).getString("parktype"),
+                        jsondata.getJSONObject(i).getString("parkname"),
+                        jsondata.getJSONObject(i).getString("email"),
+                        jsondata.getJSONObject(i).getString("zipcode"),
+                        jsondata.getJSONObject(i).getString("parkid"),
+                        jsondata.getJSONObject(i).getString("number"),
+                        jsondata.getJSONObject(i).getString("parkservicearea"),
+                        jsondata.getJSONObject(i).getString("location_1"),
+                        jsondata.getJSONObject(i).getJSONObject("location_1").getString("needs_recoding"),
+                        jsondata.getJSONObject(i).getJSONObject("location_1").getString("longitude"),
+                        jsondata.getJSONObject(i).getJSONObject("location_1").getString("latitude"),
 
-                        jsondata.getJSONObject(i).getString("friend_score")
+                        jsondata.getJSONObject(i).getJSONObject("location_1").getString("human_address"),
+                        jsondata.getJSONObject(i).getString("acreage"),
+                        jsondata.getJSONObject(i).getString("psamanager")
+
 
 
                 ));
