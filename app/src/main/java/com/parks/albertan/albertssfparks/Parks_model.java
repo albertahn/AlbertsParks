@@ -28,7 +28,8 @@ public class Parks_model {
 
 
 
-    String parktype,
+    String
+            parktype,
 
     parkname,
      email,
@@ -43,6 +44,8 @@ public class Parks_model {
      human_address,
             acreage,
             psamanager;
+
+    double distance;
 
     Parks_model(
             String parktype,
@@ -59,7 +62,8 @@ public class Parks_model {
             String latitude,
             String human_address,
             String acreage,
-            String psamanager){
+            String psamanager,
+            double distance){
 
                 this.parktype = parktype;
 
@@ -76,6 +80,7 @@ public class Parks_model {
                 this. human_address =human_address;
                 this. acreage= acreage;
                 this. psamanager= psamanager;
+        this.distance = distance;
 
 
     }// constructor
@@ -128,6 +133,11 @@ public class Parks_model {
     }
     public String getpsamanager(){
         return psamanager;
+    }
+
+    public double getdistance(){
+
+        return distance;
     }
 
 

@@ -53,7 +53,9 @@ public class ParkListAdapter extends ArrayAdapter<Parks_model> {
         // 3. Get the two text view from the rowView
         TextView parkname_view = (TextView) rowView.findViewById(R.id.parkname);
         TextView description_view = (TextView) rowView.findViewById(R.id.park_manager);
+        TextView product_picture = (TextView) rowView.findViewById(R.id.product_picture);
 
+        product_picture.setText(""+ itemsArrayList.get(position).getdistance()+ " km");
 
 
 

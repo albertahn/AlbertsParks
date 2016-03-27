@@ -22,14 +22,16 @@
         android:layout_below="@+id/parkname" />
 
 
-    <ImageView
+    <TextView
         android:layout_width="100dp"
         android:layout_height="70dp"
         android:id="@+id/product_picture"
-        android:src="@drawable/ic_launcher"
+
         android:layout_alignParentLeft="false"
         android:layout_alignParentStart="false"
-        android:layout_alignParentTop="false" />
+        android:layout_alignParentTop="false"
+        android:text="Distance"
+        android:textColor="#ffffff" />
 
     <ImageView
         android:layout_width="20dp"

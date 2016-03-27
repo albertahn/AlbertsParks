@@ -10,10 +10,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class DatabaseStuff {
+public class DatabaseStuff { /*
 	
 	public static final String KEY_ROWID = "_id";
 	public static final String KEY_parktype= "parktype";
+	public static final String KEY_parkname = "parkname";
 	public static final String KEY_email = "email";
     public static final String KEY_zipcode = "zipcode";
 
@@ -49,9 +50,10 @@ public class DatabaseStuff {
 		public void onCreate(SQLiteDatabase db) {
 			// make the database
 			
-			db.execSQL("CREATE TABLE " + DATABASE_TABLE + " (" + 
+			db.execSQL("CREATE TABLE " + DATABASE_TABLE + " (" +
 			KEY_ROWID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
 							KEY_parktype+ " TEXT NOT NULL, " +
+
 							KEY_email + " TEXT NOT NULL, " +
 
 							KEY_zipcode + " TEXT NOT NULL, " +
@@ -97,9 +99,16 @@ public class DatabaseStuff {
 		public void close(){
 			ourHelper.close();
 		}
+
+
+
 		
 //insert data
-		public long createEntry(String day, String note, String date){
+		public long createEntry(
+				String parktype,
+				String note,
+				String date
+		){
 			//write to database and close db
 			
 			ContentValues cv = new ContentValues();
@@ -244,5 +253,5 @@ public class DatabaseStuff {
 
 
     }
-	
+	*/
 }
