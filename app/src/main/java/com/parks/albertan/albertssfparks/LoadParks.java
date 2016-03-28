@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.parks.albertan.albertssfparks.utils.DatabaseStuff;
 import com.parks.albertan.albertssfparks.utils.JsonReader;
 
 import org.json.JSONArray;
@@ -43,8 +44,7 @@ public class LoadParks extends AsyncTask<String, Integer, String> {
         this.mylat = lat;
         this.mylongitude = longitude;
 
-
-    }
+    } //load parks
 
 
     //interface to get result
@@ -73,22 +73,52 @@ public class LoadParks extends AsyncTask<String, Integer, String> {
         super.onPostExecute(result);
 
 
-        if (jsonArray != null) {
-            //homeListView.getContext()
+        //check if saved data cached:
 
-            ArrayList<Parks_model> parkArraylist = generateData(jsonArray);
 
+        DatabaseStuff info = new  DatabaseStuff(activity);
+        info.open();
+        String[][] data = info.getData();
+        info.close();
+
+        ArrayList<Parks_model> generatedItem = cachedData(data);
+
+        if(generatedItem.toString() !="[]") {  //has cached data
+
+
+
+//quicksort by distance
             int low = 0;
-            int high = parkArraylist.size()- 1;
+            int high = generatedItem.size()- 1;
 
-            quickSort(parkArraylist, low, high);
+            quickSort(generatedItem, low, high);
 
-                    ParkListAdapter proAdapter = new ParkListAdapter(activity, generateData(jsonArray));
+            ParkListAdapter proAdapter = new ParkListAdapter(activity, generatedItem);
             final ListView listView = (ListView) rootView.findViewById(R.id.park_list_view);
-            listView.setAdapter(proAdapter);
+            listView.setAdapter(proAdapter) ;
 
 
-            //quickSort(jsondata, low, high);
+        }else{
+
+
+            if (jsonArray != null) {
+                //homeListView.getContext()
+
+                ArrayList<Parks_model> parkArraylist = generateData(jsonArray);
+
+
+//quicksort by distance
+                int low = 0;
+                int high = parkArraylist.size()- 1;
+
+                quickSort(parkArraylist, low, high);
+
+                ParkListAdapter proAdapter = new ParkListAdapter(activity, parkArraylist);
+                final ListView listView = (ListView) rootView.findViewById(R.id.park_list_view);
+                listView.setAdapter(proAdapter) ;
+
+
+                //quickSort(jsondata, low, high);
 
              /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -111,23 +141,51 @@ public class LoadParks extends AsyncTask<String, Integer, String> {
                 }
             });*/
 
-            //  progressBar.setVisibility(View.GONE);
+                //  progressBar.setVisibility(View.GONE);
 
-        } else {
+            } else {
 
-            Log.d("emptyarray", "sptmey man");
-        }
+                Log.d("emptyarray", "sptmey man");
+            }
+
+        }//no cached data
+
+
 
 
     }// end post ex
 
 
+    public ArrayList<Parks_model> cachedData(String[][] data){
+        ArrayList<Parks_model> items = new ArrayList<Parks_model>();
+
+        for (int i =0; i<data.length ; i++){
+
+            items.add(new Parks_model(
+                    data[i][1],
+                    data[i][2],
+                    data[i][3],
+                    data[i][4],
+                    data[i][5],
+                    data[i][6],
+                    data[i][7],
+                    data[i][8],
+                    data[i][9],
+                    data[i][10],
+                    data[i][11],
+                    data[i][12],
+                    data[i][13],
+                    Double.parseDouble(data[i][14])
+
+                    ));
+
+        } //for
+        return items;
+    } //end generate
+
+
     ArrayList<Parks_model> generateData(JSONArray jsondata) {
-
-
         System.out.println(jsondata);
-
-
 
         ArrayList<Parks_model> items = new ArrayList<Parks_model>();
 
@@ -147,6 +205,7 @@ public class LoadParks extends AsyncTask<String, Integer, String> {
                  );
 
                 items.add(new Parks_model(
+
                         jsondata.getJSONObject(i).getString("parktype"),
                         jsondata.getJSONObject(i).getString("parkname"),
                         jsondata.getJSONObject(i).getString("email"),
@@ -167,7 +226,30 @@ public class LoadParks extends AsyncTask<String, Integer, String> {
 
                 ));
 
-                // }//end if
+                //also insert in the databast
+
+                DatabaseStuff entry = new DatabaseStuff(activity);
+                entry.open();
+                entry.createEntry(
+                        jsondata.getJSONObject(i).getString("parktype"),
+                        jsondata.getJSONObject(i).getString("parkname"),
+                        jsondata.getJSONObject(i).getString("email"),
+                        jsondata.getJSONObject(i).getString("zipcode"),
+                        jsondata.getJSONObject(i).getString("parkid"),
+                        jsondata.getJSONObject(i).getString("number"),
+                        jsondata.getJSONObject(i).getString("parkservicearea"),
+                        jsondata.getJSONObject(i).getJSONObject("location_1").getString("needs_recoding"),
+                        jsondata.getJSONObject(i).getJSONObject("location_1").getString("longitude"),
+                        jsondata.getJSONObject(i).getJSONObject("location_1").getString("latitude"),
+                        jsondata.getJSONObject(i).getJSONObject("location_1").getString("human_address"),
+                        jsondata.getJSONObject(i).getString("acreage"),
+                        jsondata.getJSONObject(i).getString("psamanager"),
+                        ""+thedistance
+
+
+                );
+                entry.close();
+
             } catch (JSONException e) {
 
                 e.printStackTrace();
@@ -232,7 +314,10 @@ public class LoadParks extends AsyncTask<String, Integer, String> {
         if (high > i)
             quickSort(arr, i, high);
 
-
+/*
+        ParkListAdapter proAdapter = new ParkListAdapter(activity, generateData(jsonArray));
+        final ListView listView = (ListView) rootView.findViewById(R.id.park_list_view);
+        listView.setAdapter(proAdapter) ;*/
 
     }//quick
 
@@ -251,7 +336,7 @@ public class LoadParks extends AsyncTask<String, Integer, String> {
             dist = dist * 1.609344;
 
         return (dist);
-    }
+    }//double
 
     /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 	/*::	This function converts decimal degrees to radians						 :*/

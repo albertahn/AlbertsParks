@@ -1,5 +1,6 @@
 package com.parks.albertan.albertssfparks;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -75,7 +76,6 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        new LoadParks(this, latitude, longitude).execute();
 
 
 
@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity
 
          locationText = (TextView) this.findViewById(R.id.text_location);
 
-        locationText.setText("Your location => lat:" +latitude+", long:"+longitude);
+        locationText.setText("Your location => lat:" + latitude + ", long:" + longitude);
 
 
         Button get_location = (Button) findViewById(R.id.get_location);
@@ -103,6 +103,9 @@ public class MainActivity extends AppCompatActivity
 
             }
         });
+
+
+        new LoadParks(this, latitude, longitude).execute();
 
     }//create
 
@@ -170,6 +173,9 @@ public class MainActivity extends AppCompatActivity
                         if (location != null) {
                             latitude = location.getLatitude();
                             longitude = location.getLongitude();
+
+                            locationText = (TextView) this.findViewById(R.id.text_location);
+                            locationText.setText("Your location => lat:" +latitude+", long:"+longitude);
                         }
                     }
                 }
@@ -190,12 +196,23 @@ public class MainActivity extends AppCompatActivity
 
                                 longitude = location.getLongitude();
 
+                                locationText = (TextView) this.findViewById(R.id.text_location);
                                 locationText.setText("Your location => lat:" +latitude+", long:"+longitude);
 
 
                             }
                         }
                     }
+                }else{  //no gps
+
+                    Dialog d = new Dialog(this);
+
+                    d.setTitle("GPS IS OFF");
+
+                    TextView t = new TextView(this);
+                    t.setText("Please turn on GPS and relauch app");
+                    d.setContentView(t);
+                    d.show();
                 }
             }
 
